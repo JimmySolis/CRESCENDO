@@ -5,4 +5,4 @@
     * [Jimmy Solis] | Slack name: [Jimmy Solis] | Github : [JimmySolis]
     * [Emiliano A.] | Slack name: [Emiliano A.] | Github : [EA15243]
     * Heroku Deployed Link: [HEROKU HERE]
-    * Project Github Repo: [GITHUB REPO HERE]
+    * Project Github Repo: [https://github.com/JimmySolis/CRESCENDO]
