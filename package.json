@@ -1,0 +1,24 @@
+{
+  "name": "crescendo",
+  "version": "1.0.0",
+  "description": "Socializing your favorite music applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimmySolis/CRESCENDO.git"
+  },
+  "author": "CRESCENDO TEAM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimmySolis/CRESCENDO/issues"
+  },
+  "homepage": "https://github.com/JimmySolis/CRESCENDO#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "jest": "^28.1.3"
+  }
+}
