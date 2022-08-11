@@ -246,7 +246,11 @@
     "yallist": "^4.0.0",
     "yargs": "^17.5.1",
     "yargs-parser": "^21.1.1",
-    "yocto-queue": "^0.1.0"
+    "yocto-queue": "^0.1.0",
+    "buffer": "^6.0.3",
+    "express": "^4.18.1",
+    "jest": "^28.1.3",
+    "query-string": "^7.1.1"
   },
   "scripts": {
     "devStart": "nodemon server.js"
@@ -259,7 +263,7 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JimmySolis/CRESCENDO-/issues"
-  },
+  },   
   "homepage": "https://github.com/JimmySolis/CRESCENDO-#readme",
   "devDependencies": {
     "dotenv": "^16.0.1",
