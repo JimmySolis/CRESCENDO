@@ -3,7 +3,7 @@ const {readFromFile, writeToFile, readAndAppend} = require('../util/fsUtili');
 const querystring = require('query-string');
 const Buffer = require('buffer/').Buffer;
 
-require('.dotenv').config();
+require('dotenv').config();
 
 const client_id = process.env.client_id;
 const client_secret = process.env.client_secret;
