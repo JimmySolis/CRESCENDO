@@ -23,6 +23,7 @@
     "braces": "^3.0.2",
     "browserslist": "^4.21.3",
     "bser": "^2.1.1",
+    "buffer": "^6.0.3",
     "buffer-from": "^1.1.2",
     "bytes": "^3.1.2",
     "call-bind": "^1.0.2",
@@ -188,9 +189,11 @@
     "prompts": "^2.4.2",
     "proxy-addr": "^2.0.7",
     "qs": "^6.10.3",
+    "query-string": "^7.1.1",
     "range-parser": "^1.2.1",
     "raw-body": "^2.5.1",
     "react-is": "^18.2.0",
+    "request": "^2.88.2",
     "require-directory": "^2.1.1",
     "resolve": "^1.22.1",
     "resolve-cwd": "^3.0.0",
@@ -246,9 +249,7 @@
     "yallist": "^4.0.0",
     "yargs": "^17.5.1",
     "yargs-parser": "^21.1.1",
-    "yocto-queue": "^0.1.0",
-    "buffer": "^6.0.3",
-    "query-string": "^7.1.1"
+    "yocto-queue": "^0.1.0"
   },
   "scripts": {
     "devStart": "nodemon server.js"
@@ -261,7 +262,7 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/JimmySolis/CRESCENDO-/issues"
-  },   
+  },
   "homepage": "https://github.com/JimmySolis/CRESCENDO-#readme",
   "devDependencies": {
     "dotenv": "^16.0.1",
