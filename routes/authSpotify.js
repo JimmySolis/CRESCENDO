@@ -1,13 +1,11 @@
 const auth = require('express').Router();
-const {readFromFile, writeToFile, readAndAppend} = require('../util/fsUtili')
 const querystring = require('query-string');
-const app = require('.');
 
 require('dotenv').config();
 
 const client_id = process.env.client_id;
 const client_secret = process.env.client_secret;
-const redirect_uri = 'http://localhost:3001/redirectToHome.html';
+const redirect_uri = 'http://localhost:3001/api/callback';
 
 
 
@@ -21,9 +19,6 @@ auth.get('/', (req, res) => {
         scope: scope,
         redirect_uri: redirect_uri,
       }));
-
-  
-
   });
 
 

@@ -7,15 +7,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', api);
 
 app.get('/', (req,res) =>{
-     res.sendFile(`${__dirname}/redirectToHome.html`)
-     console.log(__dirname)
-     const code = req.query.code;
-           
-       console.log(code);
+     res.sendFile(`${__dirname}/public/index.html`)   
     }
 )
-
-
 
 app.use(express.static('public'));
 
@@ -24,4 +18,4 @@ const PORT = process.env.PORT || 3001;
 
 
 
-app.listen(PORT, () => console.log(`We are live through ${PORT}`))
+app.listen(PORT, () => console.log(`We are live through ${PORT} 🚨`))
