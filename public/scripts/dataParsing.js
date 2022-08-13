@@ -1,12 +1,13 @@
 const buttonForToken = document.getElementById('tokenBut')
 
-const getAuth = ()  => 
+const getAuth = ()  => {
 fetch('/api/authSpotify', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   });
+}
 
   const getToken = ()  => 
   fetch('/api/callback', {
