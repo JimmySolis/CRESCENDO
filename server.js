@@ -11,6 +11,14 @@ app.get('/', (req,res) =>{
     }
 )
 
+var access_token = '';
+
+app.get('/homepage', (req,res) => {
+  res.sendFile(`${__dirname}/public/homepage.html`)
+  access_token = req.query.access_token;
+  console.log(access_token)
+})
+
 app.use(express.static('public'));
 
 const PORT = process.env.PORT || 3001;
