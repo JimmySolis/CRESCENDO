@@ -3,6 +3,7 @@ const Buffer = require('buffer/').Buffer;
 const request = require('request');
 require('dotenv').config();
 const querystring = require('query-string')
+const fs = require('fs')
 
 var access_token = '';
 const client_id = process.env.client_id;
@@ -39,10 +40,19 @@ token.get('/', (req, res) =>{
           // res.send({
           //   'access token': access_token
           // });
-          res.redirect(`/homepage?` +
-          querystring.stringify({
-            access_token: access_token
-          }));
+          // res.redirect(`/homepage?` +
+          // querystring.stringify({
+          //   access_token: access_token
+          // }));
+          fs.writeFile(
+            './db/data.json',
+            JSON.stringify(body, null, 4),
+            (writeErr) =>
+              writeErr
+                ? console.error(writeErr)
+                : console.info('Added access token!')
+          );
+          res.redirect(`/homepage`)
         }
     });
     //res.status(200).send(authOptions);
