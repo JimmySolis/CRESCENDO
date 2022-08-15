@@ -1,7 +1,7 @@
 const token  = require('express').Router();
 const Buffer = require('buffer/').Buffer;
 const request = require('request');
-const axios = require('axios')
+//const axios = require('axios');
 require('dotenv').config();
 const querystring = require('query-string')
 const fs = require('fs')
@@ -60,13 +60,16 @@ token.get('/tokenFail', (req, res) => {
 })
 
 
-
-
-
-
-
-
 module.exports = token;
 
+
+// experiment to replace 'request' with axios
+
+// I think we shoudl find a way to link the spotify access token to the user's profile so they can link their accounts when they 
+// login for the first time and every time after that the app will just request a refreshed token rather than prompting them for 
+// permission all over again.
+
+// I'm also not 100% sure how long the 'code' remains viable so we could potentially just link that to the account and use it to 
+// retreive an access token when they first login and then just let that be refreshed as it expires.
 
 
