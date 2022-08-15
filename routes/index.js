@@ -12,7 +12,7 @@ app.use('/authSpotify', auth);
 
 app.use('/callback', token);
 
-app.use('/profile',profile)
+app.use('/profile',profile);
 
 
 module.exports = app;

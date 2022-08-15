@@ -1,6 +1,7 @@
 const token  = require('express').Router();
 const Buffer = require('buffer/').Buffer;
 const request = require('request');
+const axios = require('axios')
 require('dotenv').config();
 const querystring = require('query-string')
 const fs = require('fs')
@@ -10,7 +11,7 @@ const client_id = process.env.client_id;
 const client_secret = process.env.client_secret;
 const redirect_uri = 'http://localhost:3001/api/callback';
 
-token.get('/', (req, res) =>{
+token.get('/', async (req, res) =>{
   const code = req.query.code || null;
   if(code){
     var authOptions = {
@@ -37,13 +38,7 @@ token.get('/', (req, res) =>{
           console.log(body);
           
           res.status(200)
-          // res.send({
-          //   'access token': access_token
-          // });
-          // res.redirect(`/homepage?` +
-          // querystring.stringify({
-          //   access_token: access_token
-          // }));
+
           fs.writeFile(
             './db/data.json',
             JSON.stringify(body, null, 4),
@@ -55,24 +50,23 @@ token.get('/', (req, res) =>{
           res.redirect(`/homepage`)
         }
     });
-    //res.status(200).send(authOptions);
   } else{
     res.status(500).json({ message : 'nothing found'}).redirect(`./callback/tokenFail`);
   }
 })
 
-
-// token.get('/tokenSuccess', (req,res) => {
-//   const token = req.query.access_token;
-//   res.send('reached');
-//   console.log(token);
-// })
+token.get('/tokenFail', (req, res) => {
+  res.send('Token not found')
+})
 
 
 
-  module.exports = token;
 
 
 
-  //ACCIDENTALLY ADDED TO MAIN -- MAKE SURE TO COMPARE AND FIX TO COMMIT ONLY TO BRANCH AND NOT MAIN
-  //GIT ADD ALREADY EXECUTED
+
+
+module.exports = token;
+
+
+
