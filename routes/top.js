@@ -76,25 +76,32 @@ top.get('/genres', async (req, res) => {
 })
 
 class Track {
-    constructor(album, artists, name) {
+    constructor(album, artist, name) {
         this.album = album,
-        this.artists = artists,
+        this.artists = artist,
         this.name = name
     }
 }
 
 top.get('/tracks', async (req, res) => {
     let topTracks = await getTop('tracks');
+    let tracks = topTracks.items;
     let trackObjects = [];
-    topTracks.items.forEach(track => trackObjects.push(JSON.stringify(track)))
+    tracks.forEach(track => trackObjects.push(JSON.stringify(track)))
     console.log(trackObjects)
     let topTrackNames = [];
-    (topTracks.items).forEach(track => topTrackNames.push(new Track(track.album, track.artists, track.name)))
+    let topTrackArtists = [];
+    // for (var i = 0; i < tracks.length; i++) {
+    //     let trackArtists = [];
+    //     (tracks[i].artists).forEach(artist => trackArtists.push(artist.name))
+    //     topTrackNames.push(new Track(tracks[i].album.name, topTrackArtists, tracks[i].name))
+    // }
+    tracks.forEach(track => topTrackNames.push(new Track(track.album.name, track.artists[0].name, track.name)))
     console.log(topTrackNames)
     res.send(topTrackNames)
     let trackAlbums = [];
-    topTracks.forEach(track => trackAlbums.push(track.album))
-    console.log(trackAlbums)
+    tracks.forEach(track => console.log(track.artists))
+    //console.log(trackAlbums)
 })
 
 //playlists

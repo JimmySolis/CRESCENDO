@@ -27,10 +27,18 @@ const getToken = () => {
 
 getToken();
 
-profile.get('/user:id', async (req, res) => {
+// get other user's spotify profile information
+profile.get('/user/:id', async (req, res) => {
     let id = req.params.id;
-    let profileData = await getProfile(id);
+    let profileData = await getUserProfile(id);
     res.send(profileData);
+})
+
+//get other user's playlists
+profile.get('/user/:id/playlists', async (req, res) => {
+    let id = req.params.id;
+    let userPlaylists = await getUserPlaylists(id);
+    res.send(userPlaylists);
 })
 
 
@@ -38,6 +46,9 @@ profile.get('/user:id', async (req, res) => {
 
 
 
+
+
+//get current user's spotify profile information 
 profile.get('/me', async (req,res) => {
     let profileData = await getMyProfile();
     console.log(profileData)
@@ -45,28 +56,30 @@ profile.get('/me', async (req,res) => {
     //res.redirect('/api/profile/me')
 })
 
+class Playlist {
+    constructor(id, name, image) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+    }
+}
+
 //displays current user's playlists
 profile.get('/me/playlists', async (req,res) => {
     let playlists = await getMyPlaylists();
+    //all playlist info stored in playlists.items
     console.log(playlists)
     let playlistNames = [];
-    (playlists.items).forEach(playlist => playlistNames.push(playlist.name))
+    (playlists.items).forEach(playlist => playlistNames.push(new Playlist(playlist.id, playlist.name, playlist.images[0].url)));
     res.send(playlistNames);
 })
 
 
-//displays current user's information
-// profile.get('/me', async (req, res) => {
-    // let profileData = await getMyProfile();
-    // console.log(profileData)
-    // res.send(profileData)
-// })
 
 
-profile.get('/me/playlists:id')
 
 
-const getProfile = async (id) => {
+const getUserProfile = async (id) => {
     const api_url = `https://api.spotify.com/v1/users/${id}`;
     try {
         const response = await axios.get(api_url, {
@@ -112,6 +125,23 @@ const getMyPlaylists = async () => {
         console.log(error);
     }
 };
+
+//clicking on any playlist should redirect to pathway '/api/playlist/:playlist_id
+
+const getUserPlaylists = async (id) => {
+    const api_url = `https://api.spotify.com/v1/users/${id}/playlists`;
+    try {
+        const response = await axios.get(api_url, {
+            headers: {
+                'Authorization': `Bearer ${access_token}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    }catch (error) {
+        console.log(error);
+    }
+}
 
 
 module.exports = profile;
