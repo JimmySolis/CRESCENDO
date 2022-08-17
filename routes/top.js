@@ -43,6 +43,11 @@ const getToken = () => {
 getToken();
 
 
+top.get('/playlists', async (req, res) => {
+    let topPlaylists = await getTop('playlist');
+    console.log(topPlaylists);
+    res.send(topPlaylists);
+})
 
 //displays current user's top artists
 top.get('/artists', async (req, res) => {
@@ -56,22 +61,24 @@ top.get('/artists', async (req, res) => {
 
 //displays current user's top albums
 top.get('/albums', async (req, res) => {
-    let topAlbums = await getTop('albums');
+    let topAlbums = await getTop('album');
     console.log(topAlbums)
-    let topAlbumNames = [];
-    (topAlbums.items).forEach(album => topAlbumNames.push(album.name))
-    console.log(topAlbumNames)
-    res.send(topAlbumNames)
+    res.send(topAlbums)
+    //let topAlbumNames = [];
+    //(topAlbums.items).forEach(album => topAlbumNames.push(album.name))
+    //console.log(topAlbumNames)
+    //res.send(topAlbumNames)
 })
 
 //displays current user's top genres
 top.get('/genres', async (req, res) => {
-    let topGenres = await getTop('genres');
+    let topGenres = await getTop('genre');
     console.log(topGenres)
-    let topGenreNames = [];
-    (topGenres.items).forEach(genre => topGenreNames.push(genre.name))
-    console.log(topGenreNames)
-    res.send(topGenreNames)
+    res.send(topGenres)
+    // let topGenreNames = [];
+    // (topGenres.items).forEach(genre => topGenreNames.push(genre.name))
+    // console.log(topGenreNames)
+    // res.send(topGenreNames)
 
 })
 

@@ -12,25 +12,29 @@ const getPlaylists = ()  => {
 }
 
 const renderPlaylist = (playlist) => {
-    const cardEl = document.createElement('div');
-    const cardImageEl = document.createElement('img');
-    const cardBodyEl = document.createElement('div');
-    const cardBodyTitle = document.createElement('div');
-  
-    cardImageEl.classList.add('image', 'p-5');
-    cardEl.classList.add('card', 'p-5');
-    cardBodyEl.classList.add('card-body', 'p-5');
-    cardBodyTitle.classList.add('card-header', 'card-title', 'link');
-  
-    cardImageEl.setAttribute('src', playlist.image);
-    cardBodyTitle.innerHTML = playlist.name;
-    cardEl.appendChild(cardBodyTitle);
-    cardEl.appendChild(cardBodyEl);
-    cardEl.appendChild(cardImageEl);
-    petEl.appendChild(cardEl);
-  };
+    const aEl = document.createElement('a');
+    const cardEl = document.createElemen('card');
+    const imgEl = document.createElement('img');
+    const bodyEl = 
 
-  const buttonHandler = () =>
-  getPets().then((response) => response.forEach((item) => renderPet(item)));
+    aEl.setAttribute('href',`/api/playlist/${playlist.id}`);
+    cardEl.classList.add('card');
+    cardEl.setAttribute('style','width: 18rem;');
+    imgEl.classList.add('card-img-top');
+    imgEl.setAttribute('src',playlist.image);
+
+};
+
+/* <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> */
+
+const buttonHandler = () =>
+getPets().then((response) => response.forEach((item) => renderPet(item)));
 
 termButton.addEventListener('click', buttonHandler);
