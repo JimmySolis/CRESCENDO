@@ -43,6 +43,23 @@ class Playlist {
     }
 }
 
+class Track {
+    constructor(album, artist, name) {
+        this.album = album,
+        this.artists = artist,
+        this.name = name
+    }
+}
+
+class Album {
+    constructor (id, name, artist, img) {
+        this.id = id;
+        this.name = name;
+        this.artist = artist;
+        this.img = img;
+    }
+}
+
 // get current user's list of playlists
 me.get('/playlists', async (req, res) => {
     let playlistsData = await getMyPlaylists();
@@ -53,14 +70,7 @@ me.get('/playlists', async (req, res) => {
     
 })
 
-class Album {
-    constructor (id, name, artist, img) {
-        this.id = id;
-        this.name = name;
-        this.artist = artist;
-        this.img = img;
-    }
-}
+
 
 // current user's saved albums
 me.get('/saved/albums', async (req, res) => {
@@ -79,6 +89,40 @@ me.get('/saved/tracks', async (req, res) => {
     let savedTracks = await getSaved('tracks');
     res.send(savedTracks);
 });
+
+
+//displays current user's top artists
+me.get('/top/artists', async (req, res) => {
+    let topArtists = await getTop('artists');
+    console.log(topArtists)
+    let topArtistNames = [];
+    (topArtists.items).forEach(artist => topArtistNames.push(artist.name))
+    console.log(topArtistNames)
+    res.send(topArtistNames)
+})
+
+
+me.get('/top/tracks', async (req, res) => {
+    let topTracks = await getTop('tracks');
+    let tracks = topTracks.items;
+    let trackObjects = [];
+    tracks.forEach(track => trackObjects.push(JSON.stringify(track)))
+    console.log(trackObjects)
+    let topTrackNames = [];
+    let topTrackArtists = [];
+    // for (var i = 0; i < tracks.length; i++) {
+    //     let trackArtists = [];
+    //     (tracks[i].artists).forEach(artist => trackArtists.push(artist.name))
+    //     topTrackNames.push(new Track(tracks[i].album.name, topTrackArtists, tracks[i].name))
+    // }
+    tracks.forEach(track => topTrackNames.push(new Track(track.album.name, track.artists[0].name, track.name)))
+    console.log(topTrackNames)
+    res.send(topTrackNames)
+    let trackAlbums = [];
+    tracks.forEach(track => console.log(track.artists))
+    //console.log(trackAlbums)
+})
+
 
 
 // gathers and returns current user's profile data
@@ -128,6 +172,21 @@ const getSaved = async (type) => {
         console.log(error);
     }
 }
+
+const getTop = async (type) => {
+    const api_url = `https://api.spotify.com/v1/me/top/${type}`;
+    try {
+        const response = await axios.get(api_url, {
+            headers: {
+                'Authorization': `Bearer ${access_token}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
 

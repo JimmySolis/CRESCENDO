@@ -21,12 +21,26 @@ const getToken = ()  => {
   });
 }
 
-// const getProfile = () => {
-//   fetch('api/profile', {
-//     method: 'GET',
-//     headers: 
-//   })
-// }
+
+// api/me
+// api/me/playlists
+// api/me/top
+// api/me/
+
+
+
+
+const getMyProfile = ()  => {
+  fetch('/api/me', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+
+
 
 
 authBtn.addEventListener('click',getAuth);

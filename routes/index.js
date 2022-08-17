@@ -3,7 +3,7 @@ const express = require('express');
 const auth  = require('./authSpotify');
 const token = require('./tokenSpotify');
 //const profile = require('./profile');
-const top = require('./top');
+//const top = require('./top');
 const playlist = require('./playlist');
 const user = require('./user');
 const me = require('./me');
@@ -26,7 +26,7 @@ app.use('/user', user);
 
 app.use('/me', me);
 
-app.use('/me/top', top);
+///app.use('/me/top', top);
 
 
 module.exports = app;
