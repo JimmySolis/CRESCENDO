@@ -6,6 +6,7 @@ const token = require('./tokenSpotify');
 const top = require('./top');
 const playlist = require('./playlist');
 const user = require('./user');
+const me = require('./me');
 
 const app = express();
 
@@ -17,11 +18,15 @@ app.use('/callback', token);
 
 //app.use('/profile', profile);
 
-app.use('/myTop', top);
+//app.use('/me/saved', saved);
 
 app.use('/playlist', playlist);
 
 app.use('/user', user);
+
+app.use('/me', me);
+
+app.use('/me/top', top);
 
 
 module.exports = app;

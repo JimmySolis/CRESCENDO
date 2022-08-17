@@ -32,39 +32,17 @@ getToken();
 user.get('/:id', async (req, res) => {
     let id = req.params.id;
     let profileData = '';
-    // if the id is equal to 'me' the user is looking for their own spotify profile data
-    if (id == 'me') {
-        // in which case, the getMyProfile function is called to gather data on the current user's spotify profile
-        profileData = await getMyProfile();
-    } else {
-        // if the id parameter in the request is anything other than 'me' the getUserProfile(id) function 
-        // is called with the request's 'id' paramter included as its own parameter to gather information 
-        // on the spotify user with the specified id 
-        profileData = await getUserProfile(id);
-    }
+    profileData = await getUserProfile(id);
     res.send(profileData);
 });
 
-// // user/me/profile
-// sends the current user's spotify profile information
-// user.get('/me', async (req, res) => {
-//     let profileData = await getMyProfile();
-// })
 
 // user/:user_id/playlists
 // sends the user's list of saved spotify playlists based on the user's spotify id
 user.get('/:id/playlists', async (req, res) => {
     let id = req.params.id;
     let playlistsData = '';
-    // if the id is 'me' the user is looking for their own data. 
-    if (id == 'me') {
-        //in which case the getMyPlaylists() function is called to retreive data from the spotify api's 'v1/me' endpoint
-        playlistsData = await getMyPlaylists();
-    } else {
-        // if the id parameter is anything else, the getUserPlaylist(id) function is called 
-        // to retreive data from the spotify api's '/v1/users/:user_id' endpoint
-        playlistsData = await getUserPlaylists(id);
-    }
+    playlistsData = await getUserPlaylists(id);
     res.send(playlistsData);
 });
 
@@ -85,23 +63,6 @@ const getUserProfile = async (id) => {
     }
 };
 
-// gathers and returns current user's profile data
-const getMyProfile = async () => {
-    const api_url = 'https://api.spotify.com/v1/me';
-    try {
-        const response = await axios.get(api_url, {
-            headers: {
-                'Authorization': `Bearer ${access_token}`
-            }
-        });
-        console.log(response.data);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
 // gathers and returns the user's saved spotify playlists based on the user's spotify id
 const getUserPlaylists = async (id) => {
     const api_url = `https://api.spotify.com/v1/users/${id}/playlists`;
@@ -117,23 +78,6 @@ const getUserPlaylists = async (id) => {
         console.log(error);
     }
 }
-
-
-// gathers and returns data on current user's saved spotify playlists
-const getMyPlaylists = async () => {
-    const api_url = 'https://api.spotify.com/v1/me/playlists';
-    try {
-        const response = await axios.get(api_url, {
-            headers: {
-                'Authorization': `Bearer ${access_token}`
-            }
-        });
-        console.log(response.data);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 
 
